@@ -82,15 +82,17 @@ abbr        if __name__ == '__main__': ...
 alias       main
 options     head
 	if __name__ == '__main__':
-		${0:pass}
+		${0:main()}
 
 snippet     tryexcept
 abbr        try: ... except ...: ...
 options     head
 	try:
 		${1:pass}
-	except ${2:#:ExceptionClass}:
+	except ${2:#:ExceptionClass} as e:
 		${3:pass}
+	except:
+		${4:pass}
 
 snippet     tryfinally
 abbr        try: ... finally: ...
@@ -107,36 +109,14 @@ options     head
 		${0:pass}
 
 snippet     with
-abbr        with {func}({file}) as :
+abbr        with ... as :
 options     head
-	with ${1:open}(${2:#:filename, mode}) as ${3:f}:
+	with ${1:#:stmt} as ${2}:
 		${0:pass}
 
 snippet     filter
 abbr        [x for x in {list} if {condition}]
 	[$1 for ${1:x} in ${2:#:list} if ${3:#:condition}]
-
-snippet     print
-options     word
-	print(${0:#:TARGET})
-
-snippet     coding
-abbr        # -*- coding ...
-	# -*- coding: utf-8 -*-
-
-snippet     getattr
-abbr        getattr(..., ...)
-options     word
-	getattr(${1:#:obj}, ${2:#:attr})
-
-snippet     setattr
-abbr        setattr(..., ...)
-	setattr(${1:#:obj}, ${2:#:attr}, ${3:#:value})
-
-snippet     hasattr
-abbr        hasattr(..., ...)
-options     word
-	hasattr(${1:#:obj}, ${2:#:attr})
 
 snippet     pdb
 abbr        import pdb..
@@ -145,3 +125,26 @@ abbr        import pdb..
 snippet     ipdb
 abbr        import ipdb..
 	import ipdb; ipdb.set_trace()
+
+snippet     test
+abbr        def test_{name}: ...
+  def test_${1:#:target}():
+    ${0}
+
+snippet     main
+abbr        def main...
+  def main():
+    ${0}
+
+	if __name__ == '__main__':
+		main()
+
+snippet     setup
+abbr        setup(...)
+  from setuptools import setup, find_packages
+
+  setup(
+    name = "${1:#:name}",
+    version = "${2:0.0.1}",
+    packages = find_packages(),
+  )
