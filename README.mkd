@@ -1,8 +1,4 @@
 Neosnippet-snippets
 ===================
 
-The standard snippets repository for
-[neosnippet](https://github.com/Shougo/neosnippet.vim).
-
-You can fork or send pull request.
-
+This repo is a fork of [Shougo/neosnippet-snippets](https://github.com/Shougo/neosnippet-snippets).
